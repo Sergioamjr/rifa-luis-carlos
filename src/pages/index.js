@@ -84,7 +84,7 @@ export default function Home() {
                       target="_blank"
                       href={`https://api.whatsapp.com/send/?phone=5511973836084&text=${whatsappMessage}&type=phone_number&app_absent=0`}
                     >
-                      🔗 Enviar comprovante p/ whatsapp 🔗
+                      🔗 Enviar comprovante p/ whatsapp
                     </Link>
                   </div>
                   <div className="w-[80px]">
