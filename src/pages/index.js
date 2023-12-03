@@ -70,34 +70,35 @@ export default function Home() {
             {!!selectedNumbers.length && (
               <div className="sticky max-w-md rounded-md bg-white left-0 right-0 bottom-6 m-auto p-3 shadow-sm border">
                 <div className="flex justify-between">
-                  <div className="w-full max-w-[calc(100%_-_110px)]">
-                    <p className="text-base text-gray-600">
-                      Números escolhidos:
-                    </p>
-                    <p className="mb-2 font-bold text-lg overflow-hidden text-ellipsis whitespace-nowrap">
+                  <div className="w-full max-w-[calc(100%_-_90px)]">
+                    <p className="text-sm text-gray-600">Números escolhidos:</p>
+                    <p className="mb-2 font-bold_ text-gray-800 text-base overflow-hidden text-ellipsis whitespace-nowrap">
                       {[...selectedNumbers].reverse().join(", ")}
                     </p>
-                    <p className="text-base text-gray-600">Total</p>
-                    <p className="font-bold text-lg mb-2">
+                    <p className="text-sm text-gray-600">Total</p>
+                    <p className="font-bold text-base mb-2">
                       R${selectedNumbers.length * 10}
                     </p>
                     <Link
-                      className="text-blue-500 hover:text-blue-700"
+                      className="text-blue-500 text-sm hover:text-blue-700"
                       target="_blank"
                       href={`https://api.whatsapp.com/send/?phone=5511973836084&text=${whatsappMessage}&type=phone_number&app_absent=0`}
                     >
-                      🔗 Enviar comprovante por whatsapp 🔗
+                      🔗 Enviar comprovante p/ whatsapp 🔗
                     </Link>
                   </div>
-                  <div className="w-[100px]">
-                    <p className="font-bold text-lg text-center">PIX</p>
+                  <div className="w-[80px]">
+                    <p className="font-bold text-xs text-center">QR Code Pix</p>
                     <Image
                       alt="QR Code PIX"
                       className="w-full"
                       src="/assets/qrcode-luis-carlos.png"
-                      width={100}
-                      height={100}
+                      width={80}
+                      height={80}
                     />
+                    <p className="text-xs text-center ">
+                      Chave Pix 11973836084
+                    </p>
                   </div>
                 </div>
               </div>
