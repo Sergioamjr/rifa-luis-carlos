@@ -47,18 +47,18 @@ export default function Home({ reservedNumbers }) {
 
   return (
     <div className="h-full">
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-V9DVG78VWN" />
-      <Script id="google-analytics">
-        {`
+      <Head>
+        <>
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-V9DVG78VWN" />
+          <Script id="google-analytics">
+            {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
           gtag('config', 'G-V9DVG78VWN');
         `}
-      </Script>
-      <Head>
-        <>
+          </Script>
           <title>Rifa do Luis Carlos 🐶</title>
           <meta name="title" content="Rifa do Luis Carlos" />
           <meta
