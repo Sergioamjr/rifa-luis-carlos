@@ -238,7 +238,7 @@ export async function getServerSideProps() {
   );
 
   let { data: numbers } = await supabase.from("numbers").select("*");
-  const mockedNumbers = [1, 254, 71];
+  const mockedNumbers = [1, 254, 71, 13];
 
   const reservedNumbers = numbers.map((n) => n.number);
 
