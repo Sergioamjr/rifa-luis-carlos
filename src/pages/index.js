@@ -157,11 +157,16 @@ export default function Home({ reservedNumbers }) {
                       R${selectedNumbers.length * 10}
                     </p>
                     <Link
-                      className="text-blue-500 text-sm hover:text-blue-700"
+                      className="text-blue-500 text-sm hover:text-blue-700 flex items-center gap-1"
                       target="_blank"
                       href={`https://api.whatsapp.com/send/?phone=5511973836084&text=${whatsappMessage}&type=phone_number&app_absent=0`}
                     >
-                      🔗 Enviar comprovante p/ whatsapp
+                      <img
+                        className="w-7"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/WhatsApp_icon.png/479px-WhatsApp_icon.png"
+                        alt="whatsapp logo"
+                      />{" "}
+                      Enviar comprovante
                     </Link>
                   </div>
                   <div className="w-[80px]">
@@ -183,9 +188,6 @@ export default function Home({ reservedNumbers }) {
           </div>
         </div>
       </section>
-      <footer>
-        <p>Footer</p>
-      </footer>
     </div>
   );
 }
