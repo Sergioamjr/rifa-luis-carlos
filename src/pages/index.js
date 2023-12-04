@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
+
 import { Open_Sans, Gochi_Hand } from "next/font/google";
 import { useState } from "react";
 import cx from "classnames";
 import { createClient } from "@supabase/supabase-js";
+import Head from "next/head";
 
 const OpenSans = Open_Sans({ subsets: ["latin"] });
 const gochiHand = Gochi_Hand({ subsets: ["latin"], weight: "400" });
@@ -44,6 +47,31 @@ export default function Home({ reservedNumbers }) {
 
   return (
     <div className="h-full">
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-V9DVG78VWN" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-V9DVG78VWN');
+        `}
+      </Script>
+      <Head>
+        <>
+          <title>Rifa do Luis Carlos 🐶</title>
+          <meta name="title" content="Rifa do Luis Carlos" />
+          <meta
+            name="description"
+            content="Luís Carlos foi resgatado depois de 4 dias abandonado numa estrada e precisa de ajuda para seus exames e tratamento."
+          />
+
+          <meta name="keywords" content="rifa, cachorro, abandonado" />
+          <meta name="robots" content="index, follow" />
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="language" content="Portuguese" />
+        </>
+      </Head>
       <header className={gochiHand.className}>
         <div className="max-w-4xl m-auto px-4 py-5 flex justify-between items-center">
           <h1 className="text-white text-3xl">Rifa do Luís Carlos</h1>
