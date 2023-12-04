@@ -4,11 +4,12 @@ import Link from "next/link";
 import { Open_Sans, Gochi_Hand } from "next/font/google";
 import { useState } from "react";
 import cx from "classnames";
+import { createClient } from "@supabase/supabase-js";
 
 const OpenSans = Open_Sans({ subsets: ["latin"] });
 const gochiHand = Gochi_Hand({ subsets: ["latin"], weight: "400" });
 
-export default function Home() {
+export default function Home({ reservedNumbers }) {
   const [selectedNumbers, setSelectedNumbers] = useState([]);
 
   const onAddNumber = (number) => {
@@ -58,7 +59,7 @@ export default function Home() {
                   return (
                     <button
                       onClick={() => callback(i)}
-                      disabled={i == 3}
+                      disabled={reservedNumbers.includes(i)}
                       key={i}
                       className={`bg-blue-500 font-semibold py-2 px-4 hover:border-transparent rounded hover:bg-blue-700 disabled:opacity-20 disabled:pointer-events-none disabled:cursor-not-allowed ${btnClass}`}
                     >
@@ -111,4 +112,21 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_ANON_KEY
+  );
+
+  let { data: numbers, error } = await supabase.from("numbers").select("*");
+
+  const reservedNumbers = numbers.map((n) => n.number);
+
+  return {
+    props: {
+      reservedNumbers,
+    },
+  };
 }
