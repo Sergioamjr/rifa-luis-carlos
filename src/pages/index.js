@@ -65,7 +65,11 @@ export default function Home({ reservedNumbers }) {
             name="description"
             content="Luís Carlos foi resgatado depois de 4 dias abandonado numa estrada e precisa de ajuda para seus exames e tratamento."
           />
-
+          <meta property="og:image" content="/assets/thumbnail.jpg" />
+          <meta
+            property="og:url"
+            content="https://www.rifadoluiscarlos.com.br/"
+          />
           <meta name="keywords" content="rifa, cachorro, abandonado" />
           <meta name="robots" content="index, follow" />
           <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
