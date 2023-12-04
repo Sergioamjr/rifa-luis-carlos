@@ -12,29 +12,44 @@ const gochiHand = Gochi_Hand({ subsets: ["latin"], weight: "400" });
 export default function Home({ reservedNumbers }) {
   const [selectedNumbers, setSelectedNumbers] = useState([]);
 
+  const [isShowingVideos, setIsShowingVideos] = useState(false);
+
+  const [search, setSearch] = useState("");
+
   const onAddNumber = (number) => {
     setSelectedNumbers([...selectedNumbers, number]);
+  };
+
+  const onToggleVideo = () => {
+    setIsShowingVideos((p) => !p);
   };
 
   const onRemoveNumber = (number) => {
     setSelectedNumbers(selectedNumbers.filter((n) => n !== number));
   };
 
+  const onChangeSeqrch = (e) => {
+    setSearch(e.target.value);
+  };
+
   const whatsappMessage = `Olá! Estou participando da sua rifa do Luís Carlos e escolhi os números ${selectedNumbers.join(
     ", "
   )}. Segue o comprovante de pagamento.`;
+
+  const filteredNumbers = Array(301)
+    .fill(1)
+    .map((_, i) => i.toString())
+    .filter((_, i) => i !== 0)
+    .filter((n) => n.includes(search));
 
   return (
     <div className="h-full">
       <header className={gochiHand.className}>
         <div className="max-w-4xl m-auto px-4 py-5 flex justify-between items-center">
-          <h1 className="text-white text-5xl">Rifa do Luis</h1>
+          <h1 className="text-white text-3xl">Rifa do Luís Carlos</h1>
           <nav className="flex">
             <a className="text-white ml-3" href="#">
               Home
-            </a>
-            <a className="text-white ml-3" href="#">
-              Prestação de contas
             </a>
           </nav>
         </div>
@@ -42,31 +57,92 @@ export default function Home({ reservedNumbers }) {
       <section className={OpenSans.className}>
         <div className=" max-w-4xl m-auto px-4">
           <div className="relative">
+            <p className="text-white mb-3">
+              Luís Carlos foi resgatado na estrada entre Sabaúna e a vila de
+              Luís Carlos, em Mogi das Cruzes, depois de ficar abandonado no
+              mesmo lugar por 4 dias. Ele ficou internado por 4 dias na clínica
+              vetinária e agora está num lugar temporario recebendo cuidado e
+              amor.
+            </p>
+            <div className="flex justify-center">
+              <button
+                onClick={onToggleVideo}
+                className="p-2 bg-gray-500 mb-4 text-white text-sm rounded"
+              >
+                {isShowingVideos ? "Ocultar" : "Ver"} Vídeos do Luís Carlos
+              </button>
+            </div>
+            {isShowingVideos && (
+              <div className="grid grid-cols-3 gap-2 mb-2">
+                <div>
+                  <video className="h-60 w-full" controls>
+                    <source src="/assets/video-1.mp4" type="video/mp4" />
+                  </video>
+                  {/* <p className="text-gray-400 text-center py-1 text-sm">
+                    Vídeo feito em 21/11/23
+                  </p> */}
+                </div>
+                <div>
+                  <video className="h-60 w-full" controls>
+                    <source src="/assets/video-2.mp4" type="video/mp4" />
+                  </video>
+                  {/* <p className="text-gray-400 text-center py-1 text-sm">
+                    Vídeo feito em 30/11/23
+                  </p> */}
+                </div>
+                <div>
+                  <video className="h-60 w-full" controls>
+                    <source src="/assets/video-3.mp4" type="video/mp4" />
+                  </video>
+                  {/* <p className="text-gray-400 text-center py-1 text-sm">
+                    Vídeo feito em 02/12/23
+                  </p> */}
+                </div>
+              </div>
+            )}
+            <p className="text-white mb-3">
+              Foram retiradas muitas larvas de bicheira do seu corpo, ele estava
+              com infecção, anemia e teve 3 convulsões na primeira noite
+              internado. Após o início do tratamento ele ficou estável e está se
+              recuperando bem.
+            </p>
+            <p className="text-white mb-3">
+              A meta da rifa é arrecadar R$3.000 para pagar os custos da
+              internação, exames e remédios.
+            </p>
+            <p className="text-white text-center mb-4 text-2xl">
+              Escolha os números da rifa
+            </p>
+            <div className="flex">
+              <input
+                onChange={onChangeSeqrch}
+                placeholder="Pesquisar número"
+                type="number"
+                value={search}
+                className="w-full mb-4 p-2 rounded max-w-lg m-auto bg-slate-700 text-white"
+              />
+            </div>
             <div className="grid gap-4 justify-between grid-cols-3 sm:grid-cols-5 md:grid-cols-6">
-              {Array(301)
-                .fill(1)
-                .map((_, i) => {
-                  const isSelected = selectedNumbers.includes(i);
-                  const callback = isSelected ? onRemoveNumber : onAddNumber;
-                  const btnClass = cx({
-                    "bg-white hover:bg-red-400 hover:text-white text-blue-700":
-                      isSelected,
-                    "text-white": !isSelected,
-                  });
+              {filteredNumbers.map((n) => {
+                const isSelected = selectedNumbers.includes(n);
+                const callback = isSelected ? onRemoveNumber : onAddNumber;
+                const btnClass = cx({
+                  "bg-white hover:bg-red-400 hover:text-white text-blue-700":
+                    isSelected,
+                  "text-white": !isSelected,
+                });
 
-                  if (i == 0) return null;
-
-                  return (
-                    <button
-                      onClick={() => callback(i)}
-                      disabled={reservedNumbers.includes(i)}
-                      key={i}
-                      className={`bg-blue-500 font-semibold py-2 px-4 hover:border-transparent rounded hover:bg-blue-700 disabled:opacity-20 disabled:pointer-events-none disabled:cursor-not-allowed ${btnClass}`}
-                    >
-                      {i}
-                    </button>
-                  );
-                })}
+                return (
+                  <button
+                    onClick={() => callback(n)}
+                    disabled={reservedNumbers.includes(n)}
+                    key={n}
+                    className={`bg-blue-500 font-semibold py-2 px-4 hover:border-transparent rounded hover:bg-blue-700 disabled:opacity-20 disabled:pointer-events-none disabled:cursor-not-allowed ${btnClass}`}
+                  >
+                    {n}
+                  </button>
+                );
+              })}
             </div>
             {!!selectedNumbers.length && (
               <div className="sticky max-w-md rounded-md bg-white left-0 right-0 bottom-6 m-auto p-3 shadow-sm border">
