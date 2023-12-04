@@ -237,13 +237,14 @@ export async function getServerSideProps() {
     process.env.SUPABASE_ANON_KEY
   );
 
-  let { data: numbers, error } = await supabase.from("numbers").select("*");
+  let { data: numbers } = await supabase.from("numbers").select("*");
+  const mockedNumbers = [1, 254, 71];
 
   const reservedNumbers = numbers.map((n) => n.number);
 
   return {
     props: {
-      reservedNumbers,
+      reservedNumbers: [...reservedNumbers, ...mockedNumbers],
     },
   };
 }
